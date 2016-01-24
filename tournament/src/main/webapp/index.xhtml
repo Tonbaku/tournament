@@ -1,7 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>Tournament Builder</title>
@@ -12,16 +14,40 @@
 	<h:outputScript library="js" name="main.js"></h:outputScript>
 </h:head>
 <h:body>
-<div id="container" class="container-fluid">
-	<div class="menu col-xs-3">
-		<div class="button" onclick="toggleCreate()">Turnier erstellen</div>
+	<div id="container" class="container-fluid">
+		<div class="menu col-xs-3">
+			<div class="button" onclick="toggleCreate()">Create Tournament</div>
+		</div>
+		<div class="subMenu">
+			<div class="selectContainer">
+				<h:selectOneMenu id="selectType" styleClass="selectType"
+					onchange="triggerDetailAjaxUpdate();">
+					<f:selectItem itemLabel="Single Elimination" itemValue="1"></f:selectItem>
+					<f:selectItem itemLabel="Double Elimination" itemValue="2"></f:selectItem>
+					<f:selectItem itemLabel="Round Robin" itemValue="3"></f:selectItem>
+				</h:selectOneMenu>
+
+
+			</div>
+			<h:form id="detailForm">
+				<h:commandButton>
+					<f:ajax event="click" render=":menuPlaceholder @form"
+						listener="#{typeDetailBB.onAjaxCall()}" />
+				</h:commandButton>
+			</h:form>
+			<h:panelGroup id="menuPlaceholder">
+				<ui:fragment rendered="#{typeDetailBB.isRendered(1)}">
+						SingleElimination
+					</ui:fragment>
+				<ui:fragment rendered="#{typeDetailBB.isRendered(2)}">
+						DoubleElimination
+					</ui:fragment>
+				<ui:fragment rendered="#{typeDetailBB.isRendered(3)}">
+						RoundRobin
+					</ui:fragment>
+			</h:panelGroup>
+		</div>
+		<div class="previewArea col-xs-13"></div>
 	</div>
-	<div class="subMenu">
-		Blubb
-	</div>
-	<div class="previewArea col-xs-13">
-		
-	</div>
-</div>
 </h:body>
 </html>

@@ -10,5 +10,10 @@
         <managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+    	<managed-bean-name>typeDetailBB</managed-bean-name>
+        <managed-bean-class>com.sb.tournament.view.TypeDetailBB</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
 
 </faces-config>
